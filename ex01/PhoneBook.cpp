@@ -15,7 +15,7 @@ void PhoneBook::addContact(Contact newContact)
 
 void PhoneBook::displaySavedContacts()
 {
-    std::cout << "   index  |first name|last  name| nickname |  secret  " << std::endl;
+    std::cout << "   index  |first name|last  name| nickname |  number  |  secret  " << std::endl;
     for (int i = 0; i < nbContacts; i++)
     {
         std::cout << std::setw(10) << i << "|";
@@ -25,6 +25,8 @@ void PhoneBook::displaySavedContacts()
         displayContactFieldInColumn(contact.lastName);
         std::cout << '|';
         displayContactFieldInColumn(contact.nickname);
+        std::cout << '|';
+        displayContactFieldInColumn(contact.phoneNumber);
         std::cout << '|';
         displayContactFieldInColumn(contact.darkestSecret);
         std::cout << std::endl;
@@ -52,9 +54,9 @@ void PhoneBook::displayContactFields(std::string contactStrIndex)
         std::cerr << "ERROR: wrong index!" << std::endl;
         return;
     }
-        Contact contact = contacts[contactIndex];
-        std::cout << "first name: \"" << contact.firstName << "\"" << std::endl;
-        std::cout << "last name: \"" << contact.lastName << "\"" << std::endl;
-        std::cout << "nickname: \"" << contact.nickname << "\"" << std::endl;
-        std::cout << "darkest secret: \"" << contact.darkestSecret << "\"" << std::endl;
+    Contact contact = contacts[contactIndex];
+    std::cout << "first name: \"" << contact.firstName << "\"" << std::endl;
+    std::cout << "last name: \"" << contact.lastName << "\"" << std::endl;
+    std::cout << "nickname: \"" << contact.nickname << "\"" << std::endl;
+    std::cout << "darkest secret: \"" << contact.darkestSecret << "\"" << std::endl;
 }
