@@ -43,7 +43,7 @@ void PhoneBook::displayContactFieldInColumn(std::string field)
 
 void PhoneBook::displayContactFields(std::string contactStrIndex)
 {
-    if (contactStrIndex.find_first_not_of("0123456789") != std::string::npos)
+    if (contactStrIndex.find_first_not_of("0123456789") != std::string::npos || contactStrIndex.empty())
     {
         std::cerr << "ERROR: input is not numerical!" << std::endl;
         return;
