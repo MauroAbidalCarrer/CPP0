@@ -3,25 +3,40 @@
 #include <string>
 #include <cstdlib>
 
+bool getUserInput(std::string prompt, std::string& dst)
+{
+    std::cout << prompt << " :";
+    getline(std::cin, dst, '\n');
+    return std::cin.eof();
+}
+
+bool getContactField(std::string prompt, std::string& dst)
+{
+    if (getUserInput(prompt, dst))
+        return true;
+    if (dst.empty())
+    {
+        std::cout << "contact field cannot be empty!" << std::endl;
+        return getContactField(prompt, dst);
+    }
+    return false;
+}
+
 int main()
 {
     PhoneBook phoneBook;
     std::string userInput;
-    do
+    while (!getUserInput("enter command", userInput) && userInput != "EXIT")
     {
-        std::cout << "action: ";
-        std::cin >> userInput;
         if (userInput == "ADD")
         {
             Contact contact;
-            std::cout << "first name: ";
-            std::cin >> contact.firstName;
-            std::cout << "last name: ";
-            std::cin >> contact.lastName;
-            std::cout << "nickname: ";
-            std::cin >> contact.nickname;
-            std::cout << "darkest secret: ";
-            std::cin >> contact.darkestSecret;
+            if (getContactField("first name", contact.firstName) ||
+                getContactField("last name", contact.lastName) ||
+                getContactField("nickname", contact.nickname) ||
+                getContactField("phone number", contact.phoneNumber) || 
+                getContactField("darkest secret", contact.darkestSecret))
+                return 0;
             phoneBook.addContact(contact);
         }
         if (userInput == "SEARCH")
@@ -29,11 +44,11 @@ int main()
             phoneBook.displaySavedContacts();
             if (phoneBook.nbContacts > 0)
             {
-                std::cout << "contact index: ";
-                int index;
-                std::cin >> index;
-                phoneBook.displayContactFields(index);
+                std::string strIndex;
+                if (getUserInput("enter contact index", strIndex))
+                    return 0;
+                phoneBook.displayContactFields(strIndex);
             }
         }
-    } while (userInput != "EXIT");
+    }
 }

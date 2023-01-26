@@ -1,7 +1,7 @@
 
 NAME	:= MyAwesomePhoneBook
 
-SRCS	:= Contact.cpp  main.cpp PhoneBook.cpp
+SRCS	:= main.cpp PhoneBook.cpp
 OBJS	:= $(SRCS:.cpp=.o)
 
 CXX	:= c++

@@ -39,16 +39,22 @@ void PhoneBook::displayContactFieldInColumn(std::string field)
     std::cout << std::setw(10) << truncated;
 }
 
-void PhoneBook::displayContactFields(int contactIndex)
+void PhoneBook::displayContactFields(std::string contactStrIndex)
 {
-    if (contactIndex >= nbContacts || contactIndex < 0)
+    if (contactStrIndex.find_first_not_of("0123456789") != std::string::npos)
     {
-        std::cerr << "ERROR: wrong contactIndex!" << std::endl;
+        std::cerr << "ERROR: input is not numerical!" << std::endl;
         return;
     }
-    Contact contact = contacts[contactIndex];
-    std::cout << "first name: \"" << contact.firstName << "\"" << std::endl;
-    std::cout << "last name: \"" << contact.lastName << "\"" << std::endl;
-    std::cout << "nickname: \"" << contact.nickname << "\"" << std::endl;
-    std::cout << "darkest secret: \"" << contact.darkestSecret << "\"" << std::endl;
+    int contactIndex = std::atoi(contactStrIndex.c_str());
+    if (contactIndex >= nbContacts || contactIndex < 0)
+    {
+        std::cerr << "ERROR: wrong index!" << std::endl;
+        return;
+    }
+        Contact contact = contacts[contactIndex];
+        std::cout << "first name: \"" << contact.firstName << "\"" << std::endl;
+        std::cout << "last name: \"" << contact.lastName << "\"" << std::endl;
+        std::cout << "nickname: \"" << contact.nickname << "\"" << std::endl;
+        std::cout << "darkest secret: \"" << contact.darkestSecret << "\"" << std::endl;
 }
