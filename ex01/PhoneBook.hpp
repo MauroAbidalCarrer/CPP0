@@ -18,7 +18,7 @@ class PhoneBook
     public:
     int nbContacts;
     PhoneBook();
-    void addContact(Contact newContact);
+    void addContact();
     void displaySavedContacts();
     void displayContactFields(std::string contactStrIndex);
 };

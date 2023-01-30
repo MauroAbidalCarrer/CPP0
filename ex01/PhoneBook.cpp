@@ -1,4 +1,5 @@
 #include "PhoneBook.hpp"
+#include "Contact.hpp"
 
 PhoneBook::PhoneBook()
 {
@@ -6,9 +7,9 @@ PhoneBook::PhoneBook()
     nbContacts = 0;
 }
 
-void PhoneBook::addContact(Contact newContact)
+void PhoneBook::addContact()
 {
-    contacts[nextContactIndex] = newContact;
+    contacts[nextContactIndex].setFields();
     nextContactIndex = (nextContactIndex + 1) % MAX_NB_CONTACTS;
     nbContacts = std::min(nbContacts + 1, MAX_NB_CONTACTS);
 }
@@ -20,15 +21,15 @@ void PhoneBook::displaySavedContacts()
     {
         std::cout << std::setw(10) << i << "|";
         Contact contact = contacts[i];
-        displayContactFieldInColumn(contact.firstName);
+        displayContactFieldInColumn(contact.getFirstName());
         std::cout << '|';
-        displayContactFieldInColumn(contact.lastName);
+        displayContactFieldInColumn(contact.getLastName());
         std::cout << '|';
-        displayContactFieldInColumn(contact.nickname);
+        displayContactFieldInColumn(contact.getNickname());
         std::cout << '|';
-        displayContactFieldInColumn(contact.phoneNumber);
+        displayContactFieldInColumn(contact.getPhoneNumber());
         std::cout << '|';
-        displayContactFieldInColumn(contact.darkestSecret);
+        displayContactFieldInColumn(contact.getDarkestSecret());
         std::cout << std::endl;
     }
 }
@@ -55,8 +56,9 @@ void PhoneBook::displayContactFields(std::string contactStrIndex)
         return;
     }
     Contact contact = contacts[contactIndex];
-    std::cout << "first name: \"" << contact.firstName << "\"" << std::endl;
-    std::cout << "last name: \"" << contact.lastName << "\"" << std::endl;
-    std::cout << "nickname: \"" << contact.nickname << "\"" << std::endl;
-    std::cout << "darkest secret: \"" << contact.darkestSecret << "\"" << std::endl;
+    std::cout << "first name: \"" << contact.getFirstName() << "\"" << std::endl;
+    std::cout << "last name: \"" << contact.getLastName() << "\"" << std::endl;
+    std::cout << "nickname: \"" << contact.getNickname() << "\"" << std::endl;
+    std::cout << "phoneNumber: \"" << contact.getPhoneNumber() << "\"" << std::endl;
+    std::cout << "darkest secret: \"" << contact.getDarkestSecret() << "\"" << std::endl;
 }

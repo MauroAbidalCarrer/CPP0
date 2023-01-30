@@ -10,18 +10,6 @@ bool getUserInput(std::string prompt, std::string& dst)
     return std::cin.eof();
 }
 
-bool getContactField(std::string prompt, std::string& dst)
-{
-    if (getUserInput(prompt, dst))
-        return true;
-    if (dst.empty())
-    {
-        std::cout << "contact field cannot be empty!" << std::endl;
-        return getContactField(prompt, dst);
-    }
-    return false;
-}
-
 int main()
 {
     PhoneBook phoneBook;
@@ -29,16 +17,7 @@ int main()
     while (!getUserInput("enter command", userInput) && userInput != "EXIT")
     {
         if (userInput == "ADD")
-        {
-            Contact contact;
-            if (getContactField("first name", contact.firstName) ||
-                getContactField("last name", contact.lastName) ||
-                getContactField("nickname", contact.nickname) ||
-                getContactField("phone number", contact.phoneNumber) || 
-                getContactField("darkest secret", contact.darkestSecret))
-                return 0;
-            phoneBook.addContact(contact);
-        }
+            phoneBook.addContact();
         if (userInput == "SEARCH")
         {
             phoneBook.displaySavedContacts();
